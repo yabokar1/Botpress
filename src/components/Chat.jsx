@@ -16,6 +16,22 @@ const Chatbot = () => {
         containerWidth: "100%25",
         layoutWidth: "100%25",
       });
+
+      // Add event listener for incoming messages
+      window.botpressWebChat.onEvent(
+        function (event) {
+          if (event.type === "MESSAGE.SENT") {
+            // window.botpressWebChat.sendEvent({ type: "show" });
+            console.log(event);
+          }
+        },
+        ["MESSAGE.SENT"]
+      );
+    };
+
+    // Clean up function to remove the script when the component unmounts
+    return () => {
+      document.body.removeChild(script);
     };
   }, []);
 
